@@ -9,8 +9,6 @@ import java.lang.reflect.AnnotatedType;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.sun.tools.javac.code.TypeAnnotations.AnnotationType;
-
 public class InheritenceApp {
 	public static void p(String... s) {
 		// System.out.println(s.getClass().getName());
