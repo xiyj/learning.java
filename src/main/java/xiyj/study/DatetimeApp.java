@@ -14,32 +14,28 @@ public class DatetimeApp {
 		System.out.println(msg);
 	}
 
-	public static void main(String[] args) {
-		// test01();
-		testDatePlus();
-	}
-
-	// SimpleDateFormat 
-	//	G	Era designator (before christ, after christ)
-	//	y	Year (e.g. 12 or 2012). Use either yy or yyyy.
-	//	M	Month in year. Number of M's determine length of format (e.g. MM, MMM or MMMMM)
-	//	d	Day in month. Number of d's determine length of format (e.g. d or dd)
-	//	h	Hour of day, 1-12 (AM / PM) (normally hh)
-	//	H	Hour of day, 0-23 (normally HH)
-	//	m	Minute in hour, 0-59 (normally mm)
-	//	s	Second in minute, 0-59 (normally ss)
-	//	S	Millisecond in second, 0-999 (normally SSS)
-	//	E	Day in week (e.g Monday, Tuesday etc.)
-	//	D	Day in year (1-366)
-	//	F	Day of week in month (e.g. 1st Thursday of December)
-	//	w	Week in year (1-53)
-	//	W	Week in month (0-5)
-	//	a	AM / PM marker
-	//	k	Hour in day (1-24, unlike HH's 0-23)
-	//	K	Hour in day, AM / PM (0-11)
-	//	z	Time Zone
-	//	'	Escape for text delimiter
-	//	'	Single quote
+	// SimpleDateFormat
+	// G Era designator (before christ, after christ)
+	// y Year (e.g. 12 or 2012). Use either yy or yyyy.
+	// M Month in year. Number of M's determine length of format (e.g. MM, MMM or
+	// MMMMM)
+	// d Day in month. Number of d's determine length of format (e.g. d or dd)
+	// h Hour of day, 1-12 (AM / PM) (normally hh)
+	// H Hour of day, 0-23 (normally HH)
+	// m Minute in hour, 0-59 (normally mm)
+	// s Second in minute, 0-59 (normally ss)
+	// S Millisecond in second, 0-999 (normally SSS)
+	// E Day in week (e.g Monday, Tuesday etc.)
+	// D Day in year (1-366)
+	// F Day of week in month (e.g. 1st Thursday of December)
+	// w Week in year (1-53)
+	// W Week in month (0-5)
+	// a AM / PM marker
+	// k Hour in day (1-24, unlike HH's 0-23)
+	// K Hour in day, AM / PM (0-11)
+	// z Time Zone
+	// ' Escape for text delimiter
+	// ' Single quote
 
 	public static void test01() {
 		p("test01(), parsing date");
@@ -51,7 +47,8 @@ public class DatetimeApp {
 
 			String str = "Sat Dec 16 19:40:00 EST 2017";
 			// String str = "Thu 11/16/2017";
-			// DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'EST' yyyy", dateFormatSymbols);
+			// DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'EST' yyyy",
+			// dateFormatSymbols);
 			p("current date : " + df.format(new Date()));
 
 			p("try to parse : " + str);
@@ -79,12 +76,13 @@ public class DatetimeApp {
 
 			String str = "Sat Dec 29 19:40:00 EST 2017";
 			// String str = "Thu 11/16/2017";
-			// DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'EST' yyyy", dateFormatSymbols);
+			// DateFormat df = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'EST' yyyy",
+			// dateFormatSymbols);
 			Date date = df.parse(str);
 			p("parse : " + str + ", result : " + date.toString());
-			
-			Calendar c = Calendar.getInstance(); 
-			c.setTime(date); 
+
+			Calendar c = Calendar.getInstance();
+			c.setTime(date);
 			c.add(Calendar.DATE, 1);
 			date = c.getTime();
 			p("plus 1 days : " + date.toString());
@@ -96,4 +94,34 @@ public class DatetimeApp {
 			e.printStackTrace();
 		}
 	}
+
+	public static void testMillisTime() {
+		long millisLong = System.currentTimeMillis();
+		p("millis now : " + millisLong);
+
+		millisLong = 1514408413441879L;
+		// Date date = new Date(millisLong);
+		// p("convert " + millisLong + " to date : " + date.toString());
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(millisLong/1000);
+		p("Milliseconds to Date using Calendar:" + cal.getTime().toString());
+		
+		Date date = cal.getTime();
+		p("date's gettime : " + date.getTime());
+		p("  original long: " + millisLong);
+		
+		//		long nano = System.nanoTime();
+		//		p("nano time : " + nano);
+		//		cal.setTimeInMillis(nano/1000);
+		//		date = cal.getTime();
+		//		p("nano date : " + date.toString());
+	}
+
+	public static void main(String[] args) {
+		// test01();
+		// testDatePlus();
+		testMillisTime();
+	}
+
 }
