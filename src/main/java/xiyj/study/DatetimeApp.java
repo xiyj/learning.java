@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class DatetimeApp {
 	public static void p(String msg) {
@@ -103,25 +104,68 @@ public class DatetimeApp {
 		// Date date = new Date(millisLong);
 		// p("convert " + millisLong + " to date : " + date.toString());
 
-		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(millisLong/1000);
-		p("Milliseconds to Date using Calendar:" + cal.getTime().toString());
-		
-		Date date = cal.getTime();
-		p("date's gettime : " + date.getTime());
-		p("  original long: " + millisLong);
-		
-		//		long nano = System.nanoTime();
-		//		p("nano time : " + nano);
-		//		cal.setTimeInMillis(nano/1000);
-		//		date = cal.getTime();
-		//		p("nano date : " + date.toString());
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(millisLong / 1000);
+			p("Milliseconds to Date using Calendar:" + cal.getTime().toString());
+
+			Date date = cal.getTime();
+			p("date's gettime : " + date.getTime());
+			p("  original long: " + millisLong);
+
+			// long nano = System.nanoTime();
+			// p("nano time : " + nano);
+			// cal.setTimeInMillis(nano/1000);
+			// date = cal.getTime();
+			// p("nano date : " + date.toString());
+		}
+
+		{
+			Date date = new Date(millisLong);
+			p("millis now : " + millisLong);
+			p("date : " + date.toString());
+		}
+	}
+
+	public static void testTimeZone() {
+		{
+			Date date1 = new Date();
+			System.out.println("default date : " + date1);
+		}
+
+		{
+			TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+			// or pass in a command line arg: -Duser.timezone="UTC"
+			Date date2 = new Date();
+			System.out.println("UTC date : " + date2);
+		}
+
+		{
+			System.setProperty("user.timezone", "PST");
+			Date date3 = new Date();
+			System.out.println("PST date : " + date3);
+			System.out.println("set system property not work");
+		}
+
+		{
+			TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"));
+			Date date4 = new Date();
+			System.out.println("America/New_York date : " + date4);
+		}
+
+		{
+			TimeZone.setDefault(TimeZone.getTimeZone("EST"));
+			Date date4 = new Date();
+			System.out.println("EST date : " + date4);
+		}
 	}
 
 	public static void main(String[] args) {
 		// test01();
 		// testDatePlus();
 		testMillisTime();
+
+		testTimeZone();
 	}
 
 }

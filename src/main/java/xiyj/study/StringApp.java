@@ -17,10 +17,11 @@ public class StringApp {
 
 	public static void main(String[] args) {
 		// test01();
-		regexMatch();
+		// regexMatch();
 		// regexSearch();
 		// testNumParsing();
 		// testSplitAndSpace();
+		testSplit();
 	}
 
 	public static void test01() {
@@ -155,4 +156,21 @@ public class StringApp {
 		}
 	}
 
+	public static void testSplit() {
+		String s = "1,,3,,5,,,";
+		System.out.println("test string : " + s);
+		{
+			String[] ss = s.split(",");
+			System.out.println("split , : " + String.join("|", ss));
+
+			ss = s.split(",", 3);
+			System.out.println("split , 3 : " + String.join("|", ss));
+
+			ss = s.split(",", 6);
+			System.out.println("split , 6 : " + String.join("|", ss));
+
+			ss = s.split(",", -1);
+			System.out.println("split , -1 : " + String.join("|", ss));
+		}
+	}
 }
