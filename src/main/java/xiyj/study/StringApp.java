@@ -21,7 +21,9 @@ public class StringApp {
 		// regexSearch();
 		// testNumParsing();
 		// testSplitAndSpace();
-		testSplit();
+		// testSplit();
+		// testSpace();
+		testNull();
 	}
 
 	public static void test01() {
@@ -59,7 +61,7 @@ public class StringApp {
 				p("parse date : " + d.toString());
 			} else
 				p("not match");
-			
+
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +69,7 @@ public class StringApp {
 		{
 			String str = "20171204_1205";
 			p(str + " match \"\\\\d{8}.*\" : " + str.matches("\\d{8}.*"));
-			String arcDir = str.substring(0, 6) + File.separator + str.substring(6,8);
+			String arcDir = str.substring(0, 6) + File.separator + str.substring(6, 8);
 			p("arcDir should be " + arcDir);
 		}
 	}
@@ -97,11 +99,12 @@ public class StringApp {
 			p("null plus something : " + n + "yes");
 		}
 	}
+
 	public static void testSplitAndSpace() {
 		{
 			String s = "|A|BB|CCC||||";
 			p("string to split : " + s);
-			
+
 			p("normal split");
 			String[] words = s.split("|");
 			for (String string : words) {
@@ -124,7 +127,7 @@ public class StringApp {
 		{
 			String s = ",A,BB,CCC,,,,";
 			p("string to split : " + s);
-			
+
 			p("normal split");
 			String[] words = s.split(",");
 			for (String string : words) {
@@ -143,11 +146,11 @@ public class StringApp {
 				System.out.println("#" + string + "<");
 			}
 		}
-		
+
 		{
 			String s = " 12,	,		,as";
-			p("replace \\s as : " + s.replaceAll("\\s",  "x"));
-			p("replace \\S as : " + s.replaceAll("\\S",  "x"));
+			p("replace \\s as : " + s.replaceAll("\\s", "x"));
+			p("replace \\S as : " + s.replaceAll("\\S", "x"));
 			p("-1 is :" + -1);
 			String[] words = s.split("\\,", -1);
 			for (String string : words) {
@@ -172,5 +175,28 @@ public class StringApp {
 			ss = s.split(",", -1);
 			System.out.println("split , -1 : " + String.join("|", ss));
 		}
+	}
+
+	public static void testSpace() {
+		String s;
+
+		s = "hello world";
+		p("search space in string : " + s);
+		if (s.matches(".*\\s.*"))
+			p("yes");
+
+		s = "helloworld";
+		p("search space in string : " + s);
+		if (s.matches(".*\\s.*"))
+			p("yes");
+		else
+			p("no");
+
+	}
+	
+	public static void testNull() {
+		String s = "hello";
+		String t = null;
+		p("null + s : "  + (null + s));
 	}
 }
